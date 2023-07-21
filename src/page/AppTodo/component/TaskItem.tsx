@@ -27,7 +27,6 @@ function TaskItem(props: TypeProps) {
          ...data,
          status: isCheck ? "1" : "2",
       }
-      console.log(isCheck)
       actionUpdateItem(newData)
    }
 

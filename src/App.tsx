@@ -1,10 +1,15 @@
 import React from "react"
-import AppTodo from "./page/AppTodo"
 import { ImContrast, ImSun } from "react-icons/im"
 import { useTheme } from "./redux/slices/theme.slice"
 
+import { BrowserRouter } from "react-router-dom"
+import Routers from "./routes"
+
+
+
 function App() {
    const { theme, actionSetTheme } = useTheme()
+
 
    const darkMode = theme || false
 
@@ -13,11 +18,9 @@ function App() {
    }
 
    React.useEffect(() => {
-      if (darkMode) {
-         document.documentElement.classList.add("dark")
-      } else {
-         document.documentElement.classList.remove("dark")
-      }
+      darkMode
+         ? document.documentElement.classList.add("dark")
+         : document.documentElement.classList.remove("dark")
    }, [darkMode])
 
    return (
@@ -31,7 +34,9 @@ function App() {
                {darkMode ? <ImSun /> : <ImContrast />}
             </button>
          </div>
-         <AppTodo />
+         <BrowserRouter>
+            <Routers />
+         </BrowserRouter>
       </div>
    )
 }
