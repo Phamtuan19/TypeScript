@@ -1,4 +1,7 @@
-import { useRef, useState } from "react"
+// ứng dụng sử dụng userCallback, useRef, useState, React.memo
+
+import { useCallback, useRef, useState } from "react"
+import Button from "./Button"
 
 interface TypeTimer {
    current: number | undefined
@@ -9,21 +12,21 @@ export default function Home() {
 
    let timer: TypeTimer = useRef()
 
-   const handleStart = () => {
+   const handleStart = useCallback(() => {
       timer.current = setInterval(() => {
          setCount((prevCount) => prevCount - 1)
       }, 1000)
-   }
+   }, [])
 
-   const handleStop = () => {
+   const handleStop = useCallback(() => {
       clearInterval(timer.current)
-   }
+   }, [])
 
    return (
       <div className="App">
          <h1>{count}</h1>
-         <button onClick={handleStart}>Start</button>
-         <button onClick={handleStop}>Stop</button>
+         <Button onclick={handleStart} title="Start" />
+         <Button onclick={handleStop} title="Stop" />
       </div>
    )
 }
